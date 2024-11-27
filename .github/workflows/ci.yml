@@ -2,7 +2,7 @@ name: Continuous Integration
 
 env:
   DOTNET_VERSION: '8.0'
-  API_DIRECTORY: 'src/GitHubActionsDotNet.Api/GitHubActionsDotNet.csproj'
+  API_DIRECTORY: 'src/GitHubActionsDotNet.Api/GitHubActionsDotNet.Api.csproj'
 
 on:
   push:
@@ -22,7 +22,7 @@ jobs:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
       - name: Build with dotnet
-        run: dotnet build --configuration Release
+        run: dotnet build ${{ env.API_DIRECTORY }} --configuration Release
 
       - name: Publish with dotnet
         run: dotnet publish ${{ env.API_DIRECTORY }} --configuration Release --no-build -o artifacts
