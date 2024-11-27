@@ -1,0 +1,28 @@
+name: Continuous Integration
+
+env:
+  DOTNET_VERSION: '8.0'
+  API_DIRECTORY: 'src/GitHubActionsDotNet.Api/GitHubActionsDotNet.csproj'
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    name: Continuous Integration
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up .NET Core
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Build with dotnet
+        run: dotnet build --configuration Release
+
+      - name: Publish with dotnet
+        run: dotnet publish ${{ env.API_DIRECTORY }} --configuration Release --no-build -o artifacts
