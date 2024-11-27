@@ -26,3 +26,8 @@ jobs:
 
       - name: Publish with dotnet
         run: dotnet publish ${{ env.API_DIRECTORY }} --configuration Release --no-build -o artifacts
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dometrain-artifact
+          path: artifacts/
